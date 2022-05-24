@@ -1,0 +1,105 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  background: rgb(255, 225, 187);
+  color: rgb(201, 148, 49);
+  height: 100vh;
+  font-family: sans-serif;
+}
+header {
+  width: 100%;
+}
+nav {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+}
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+img {
+  padding-inline: 1rem;
+}
+ul {
+  list-style: none;
+}
+.header-ul {
+  display: flex;
+  list-style: none;
+  text-align: center;
+}
+li {
+  padding-inline: 1rem;
+  text-align: center;
+}
+a {
+  cursor: pointer;
+  background: transparent;
+  color: black;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  transition: background 0.4s linear, color 0.5s linear;
+  text-decoration: none;
+  font-weight: bold;
+}
+a:hover {
+  background: rgb(58, 58, 58);
+  color: rgb(230, 220, 220);
+}
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+  align-items: center;
+  text-align: center;
+  margin-inline: auto;
+  gap: 1rem;
+}
+.type,
+.name,
+.price {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+select,
+input {
+  margin-block: 0.4rem;
+}
+select {
+  width: 100%;
+  background: transparent;
+  border: 5px solid rgb(88, 53, 0);
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+  padding-inline: 1rem;
+}
+input {
+  border-radius: 10px;
+  background: rgb(201, 148, 49);
+  color: rgb(88, 53, 0);
+  border-style: none;
+  padding: 0.4rem 1rem;
+  font-weight: 1.1rem;
+  font-weight: bold;
+  text-align: center;
+}
+button {
+  background: rgb(88, 53, 0);
+  color: rgb(201, 148, 49);
+  font-size: 1rem;
+  font-weight: bold;
+  width: 20%;
+  border-style: none;
+  border-radius: 10px;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+}

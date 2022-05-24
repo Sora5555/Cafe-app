@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/foodanddrink.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header class="cashier-header">
+      <nav>
+        <div class="image"><img src="/Group 76.svg" alt="" /></div>
+        <h1>BISA NGOPI</h1>
+        <ul class="header-ul">
+          <li><a href="/table">tabel order</a></li>
+          <li><a href="/drink">minuman</a></li>
+          <li><a href="/new-menu">new menu</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="table-container">
+      <table>
+        <tr>
+          <th>Nama</th>
+          <th>Harga</th>
+          <th>Stok</th>
+          <th>Aksi</th>
+        </tr>
+        <%for(i = 0; i < menu.length; i++){%>
+        <tr>
+          <td><%=menu[i].name%></td>
+          <td><%=menu[i].price.toLocaleString("de")%> Rp</td>
+          <td><%= menu[i].stock %></td>
+          <td class="form">
+            <a href="/edit-menu/<%=menu[i].id_menu%>">Edit</a>
+            <form
+              action="/remove_menu/<%=menu[i].id_menu%>?_method=DELETE"
+              method="post"
+            >
+              <button type="submit" class="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+        <%}%>
+      </table>
+    </div>
+  </body>
+</html>

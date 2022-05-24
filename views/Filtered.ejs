@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <th>id_table</th>
+        <th>makanan</th>
+        <th>minuman</th>
+        <th>petugas</th>
+        <th>harga</th>
+        <th>aksi</th>
+      </tr>
+      <%for(i = 0; i < orders.length; i++){%>
+      <tr>
+        <td><%=orders[i].id_table%></td>
+        <td>
+          <%for(j = 0; j < orderFood.length; j++){%>
+          <ul>
+            <%if(orderFood[j].id_order === orders[i].id_order){%>
+            <li><%=orderFood[j].name%> X<%=orderFood[j].quantity%></li>
+            <%}%>
+          </ul>
+          <%}%>
+        </td>
+        <td>
+          <%for(j = 0; j < orderDrink.length; j++){%>
+          <ul>
+            <%if(orderDrink[j].id_order === orders[i].id_order){%>
+            <li><%=orderDrink[j].name%> X<%=orderDrink[j].quantity%></li>
+            <%}%>
+          </ul>
+          <%}%>
+        </td>
+        <td><%= orders[i].officer %></td>
+        <td><%=orders[i].total_cost.toLocaleString("de")%> Rp</td>
+        <td>
+          <%if(orders[i].status === "paid"){%>
+          <h5>Sudah Bayar</h5>
+          <%} else {%>
+          <form action="/update/<%=orders[i].id_order%>" method="post">
+            <button type="submit">Update</button>
+          </form>
+          <%}%>
+          <form
+            action="/delete/<%=orders[i].id_order%>?_method=DELETE"
+            method="post"
+          >
+            <button type="submit">Hapus pesanan</button>
+          </form>
+        </td>
+      </tr>
+      <%}%>
+    </table>
+  </body>
+</html>

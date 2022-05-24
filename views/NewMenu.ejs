@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/newmenu.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header class="cashier-header">
+      <nav>
+        <div class="image"><img src="/Group 76.svg" alt="" /></div>
+        <h1>BISA NGOPI</h1>
+        <ul class="header-ul">
+          <li><a href="/table">tabel order</a></li>
+          <li><a href="/food">makanan</a></li>
+          <li><a href="/drink">minuman</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <form action="/new-menu" method="post">
+      <div class="type">
+        <label for="type">tipe menu yang mau ditambah</label>
+        <select name="type" id="type">
+          <option value="food">Makanan</option>
+          <option value="drink">Minuman</option>
+        </select>
+      </div>
+      <div class="name">
+        <label for="name">Nama item</label>
+        <input type="text" name="name" id="name" />
+      </div>
+      <div class="price">
+        <label for="price">Harga item</label>
+        <input type="number" name="price" id="price" />
+      </div>
+      <button type="submit">Tambahkan</button>
+    </form>
+  </body>
+</html>

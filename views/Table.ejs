@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/table.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <% if(role !== "admin") {%> <% let type %> <% if(role == "Manager") {%> <% type =
+    orders %> <%-include("./partials/Manager") %>
+    <div class="Manager-only">
+      <input type="text" class="search-bar" />
+      <a class="search-link">Cari</a>
+      <div class="revenue-container">
+        <div>
+          <h4>Pendapatan hari ini</h4>
+          <h5><%= daily_rev.toLocaleString("de") %> Rp</h5>
+        </div>
+        <div>
+          <h4>Pendapatan bulan ini</h4>
+          <h5><%= month_rev.toLocaleString("de") %> Rp</h5>
+        </div>
+      </div>
+    </div>
+    <% } else { %><%-include("./partials/Cashier") %> <% type = userOrder %> <% } %>
+    <div class="table-container">
+      <table>
+        <tr>
+          <th>id_table</th>
+          <th>makanan</th>
+          <th>minuman</th>
+          <th>catatan</th>
+          <th>petugas</th>
+          <th>harga</th>
+          <th>aksi</th>
+        </tr>
+        <%for(i = 0; i < type.length; i++){%>
+        <tr>
+          <td><%=type[i].id_table%></td>
+          <td>
+            <%for(j = 0; j < orderFood.length; j++){%>
+            <ul>
+              <%if(orderFood[j].id_order === type[i].id_order){%>
+              <li><%=orderFood[j].name%> X<%=orderFood[j].quantity%></li>
+              <%}%>
+            </ul>
+            <%}%>
+          </td>
+          <td>
+            <%for(j = 0; j < orderDrink.length; j++){%>
+            <ul>
+              <%if(orderDrink[j].id_order === type[i].id_order){%>
+              <li><%=orderDrink[j].name%> X<%=orderDrink[j].quantity%></li>
+              <%}%>
+            </ul>
+            <%}%>
+          </td>
+          <td><%= type[i].notes %></td>
+          <td><%= type[i].officer %></td>
+          <td><%=type[i].total_cost.toLocaleString("de")%> Rp</td>
+          <td class="form-action">
+            <%if(type[i].status === "paid"){%>
+            <h5>Sudah Bayar</h5>
+            <form action="/delete/<%=type[i].id_order%>?_method=DELETE" method="post">
+              <button type="submit" class="submit">Hapus pesanan</button>
+            </form>
+            <%} else {%>
+            <form action="/update/<%=type[i].id_order%>" method="post">
+              <button type="submit" class="submit">Update</button>
+            </form>
+            <a href="/edit/<%= type[i].id_order %> ">Edit Order</a>
+            <%}%>
+          </td>
+        </tr>
+        <%}%>
+      </table>
+      <% } else {%> <%-include("partials/Admin") %>
+      <table>
+        <tr>
+          <th>username</th>
+          <th>role</th>
+          <th>last activity</th>
+        </tr>
+        <% for(i = 0; i < officer.length; i++) {%>
+        <tr>
+          <td><%= officer[i].username %></td>
+          <td><%= officer[i].role %></td>
+          <td><%= officer[i].last_login_date %></td>
+        </tr>
+        <% } %>
+      </table>
+      <% } %>
+    </div>
+    <script>
+      const link = document.querySelector(".search-link");
+
+      link.addEventListener("click", () => {
+        const search_bar = document.querySelector(".search-bar").value;
+        window.location.assign(`/filtered/${search_bar}`);
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form method="post">
+      <div class="food-container">
+        <%for(i=0; i < menu.length; i++){ %> <% let type=0 %> <%for(j=0; j < orderfood.length; j++){%> <% if(orderfood[j].name===menu[i].name) {%>
+        <h5 class="<%= orderfood[j].name.replaceAll(" ", "-") %>"><%= orderfood[j].name %> X<%= orderfood[j].quantity %></h5>
+        <% type=orderfood[j].quantity %> <% } %> <% } %> <% for(j=0; j < orderdrink.length; j++){%><%if(orderdrink[j].name===menu[i].name){%>
+        <h5 class="<%= orderdrink[j].name %>"><%= orderdrink[j].name %> X<%= orderdrink[j].quantity %></h5>
+        <% type=orderdrink[j].quantity %><% } %><% } %>
+        <label for="name"><%= menu[i].name %></label>
+        <input type="text" value="<%= menu[i].name %>" name="menu[<%= [i] %>][name]" class="name" id="name" hidden />
+        <input type="number" name="menu[<%= [i] %>][quantity]" id="name" min="0" value="<%= type %>" class="input" max="<%= menu[i].stock %>" />
+        <% } %>
+        <button type="submit">Edit new</button>
+      </div>
+    </form>
+    <script>
+      const input = document.querySelectorAll(".input");
+      const name = document.querySelectorAll(".name");
+      const container = document.querySelector(".food-container");
+
+      for (i = 0; i < input.length; i++) {
+        const name1 = name[i].value.replaceAll(" ", "-");
+
+        input[i].addEventListener("change", function (evt) {
+          const className = document.querySelectorAll(`.${name1}`);
+
+          if (parseInt(this.value) == 1 && className.length === 0) {
+            const className = document.querySelector(`.${name1}`);
+            const div = document.createElement("div");
+            const h1 = `<h5 class="${name1}">${name1} X1</h5>`;
+            div.innerHTML = h1;
+            container.appendChild(div);
+          } else if (parseInt(this.value) >= 1) {
+            className[0].innerHTML = `${name1} X${this.value}`;
+          } else {
+            className[0].remove();
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
